@@ -1,0 +1,67 @@
+.backgroundProduit{
+    background-image: url("../Static/img/imgProduit/BackgroundPhotoProduit.avif");
+}
+
+/* CAROUSEL */
+.rounded{
+    border-radius: 25% !important;
+}
+
+.carousel { overflow: hidden; }
+
+.carousel-inner {
+    display: flex;
+    justify-content: center;
+}
+.carousel-item { 
+    overflow: hidden;
+    width: 175%;
+ }
+
+.carousel-control-prev{
+    background-color: black;
+    -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
+    mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
+    -webkit-mask-repeat: no-repeat;
+    position:absolute;
+
+}
+.carousel-control-next{
+    background-color: black;
+    -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    -webkit-mask-repeat: no-repeat;
+    position:absolute;
+  
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon{
+    background-image: none;
+
+}
+
+
+/* BUTTON CUSTOM */
+
+.main_Produit .btn{
+   border-radius: unset;
+   background-color: white;
+}
+
+.main_Produit .btn-primary{
+    background-color: rgba(240, 133, 25, 0.5);
+    color:black;
+    border-color:rgba(240, 133, 25, 0.5) ;
+}
+
+.main_Produit .btn-primary:hover{
+    background-color: #C3E5AE ;
+}
+
+/* PRIX */
+
+.prix{
+    font-size: 1.75rem;
+    font-family: var(--PoliceTitle);
+    font-weight: bold;
+}

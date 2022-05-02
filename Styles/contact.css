@@ -1,0 +1,42 @@
+:root
+{
+    --PoliceTitle : Luciole;
+}
+
+h1, h2, h3, button
+{
+    font-family: var(--PoliceTitle) ;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.nobg {
+    background-color: #c3e5ae;
+}
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+.bodybg {
+    background-color: #e2eeda;
+}
+
+html {
+    min-height: 100vh;
+}
+
+.bdtoporange {
+    border-top: 1px solid #f08519;
+}
+
+.btw-warning{
+    color: #f08519 !important;
+}
+

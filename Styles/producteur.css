@@ -1,0 +1,39 @@
+:root {
+    --primary: #C3E5AE;
+    --secondary: #C3E5AE33;
+}
+
+html {
+    min-height: 100vh;
+}
+
+.custom-color-primary {
+    background-color: var(--primary);
+}
+
+.custom-color-secondary {
+    background-color: var(--secondary);
+}
+
+.custom-color-third {
+    background-color: white;
+}
+
+.producteur {
+    background: linear-gradient(rgba(205, 201, 203, 0.8), rgba(205, 201, 203, 0.8)), url('/Static/img/BackgroundProducteur.jpg');
+}
+
+.carousel-inner img {
+    max-height: 400px;
+    width: 100%;
+}
+
+.card-rounded {
+    border-radius: 30px 30px 0px 0px !important;
+}
+
+#products .card {
+    padding: 70px;
+    padding-top: 30px;
+    padding-bottom: 15px;
+}

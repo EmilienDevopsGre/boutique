@@ -1,0 +1,432 @@
+:root {
+    --backgroundColor_main: #EEEEEE;
+    --backgroundColor_FHLB: #C3E5AE;
+    --ColorTitle: #000000;
+    --PoliceTitle: Luciole;
+    --backgroundColor_section: #D8D2CB;
+    --boderRadius_max: 0.5rem;
+    --boderRadius_min: 0.2rem;
+}
+
+body {
+    background-color: var(--backgroundColor_main);
+}
+
+
+h1, h2, h3 {
+    text-transform: uppercase;
+    font-family: var(--PoliceTitle);
+    font-weight: bolder;
+}
+
+
+/**************************/
+/****** END BOUTON ********/
+/**************************/
+/**************************/
+/***** START  HEADER ******/
+/**************************/
+
+header {
+    width: 100%;
+    height: 70px;
+    background-color: rgba(195, 229, 174, 1);
+    display: flex;
+    position: relative;
+}
+
+header img {
+    height: 70px;
+}
+
+header .box {
+    display: none;
+}
+
+header nav {
+    position: absolute;
+    right: 15%;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+header a {
+    color: white;
+    font-family: Roboto;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+
+/**************************/
+/****** END  HEADER *******/
+/**************************/
+
+
+
+
+
+
+
+
+/**************************/
+/******* START  CV ********/
+/**************************/
+
+
+.cv section {
+    background-color: var(--backgroundColor_main);
+    width: auto;
+    max-width: 70em;
+    /* text-align: justify; */
+    margin : 50px auto ;
+    border-radius: 15px;
+
+}
+
+
+.cv h1 {
+    color: rgb(0, 0, 0);
+}
+
+.cv h2 {
+    font-size: 3em;
+    text-align: center;
+}
+
+.cv h3, h2 {
+    color: black
+}
+
+.blocgauche h3 {
+    color: black;
+}
+
+.cv img {
+    border-radius: 0.5rem;
+    max-width: 130px;
+    filter: drop-shadow(10px 10px 10px);
+
+}
+
+/* .cv .name
+{
+  display: flex;
+  align-items: center;
+  justify-content:flex-start;
+} */
+/* .cv .name img
+{
+  padding: 20px;
+} */
+
+
+#nomLI {
+    display: flex;
+    flex-direction: row;
+}
+
+.cv a img {
+    max-width: 50px;
+}
+
+.cv section {
+    display: grid;
+    grid-template-areas: "blocgauche blocdroite";
+    grid-template-rows: 1fr;
+    grid-template-columns: 1.2fr 3fr;
+    contain: content;
+}
+
+.blocgauche, .blocdroite1, .blocdroite2 {
+    padding: 20px;
+}
+
+.blocgauche {
+    grid-area: blocgauche;
+    display: flex;
+    flex-direction: column;
+    background: rgba(195, 229, 174, 1);
+    background: linear-gradient(90deg, rgba(195, 229, 174, 1), 1) 100%, rgba(216, 210, 203, 1) 100%;
+    height: 100%;
+    min-width: 25%;
+}
+
+.blocgauche {
+    position: relative;
+}
+
+.blocgauche a.linkedin {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+a.linkedin img:hover {
+    -ms-transform: scale(1.5);
+    /* IE 9 */
+    -webkit-transform: scale(1.5);
+    /* Safari 3-8 */
+    transform: scale(1.5);
+}
+
+
+.blocdroite {
+    grid-area: blocdroite;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: left;
+    height: 100%;
+}
+
+.blocdroite {
+    background: rgb(238, 238, 238);
+    background: radial-gradient(circle, rgba(238, 238, 238, 1) 48%, rgba(216, 210, 203, 1) 71%);
+}
+
+.blocdroite1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 5;
+}
+
+.blocdroite2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-grow: 2;
+}
+
+.formation, .experience {
+    padding: 15px;
+}
+
+.compétences, .blocdroite2 {
+    background-color: var(--backgroundColor_section);
+    border-radius: 15px;
+}
+
+/* responsive */
+
+@media (max-width: 800px) {
+    .cv section {
+        grid-template-areas: "blocgauche"
+            "blocdroite";
+        grid-template-columns: 1fr;
+    }
+
+    .cv>section div {
+        display: block;
+    }
+
+    .blocgauche {
+        background: rgba(195, 229, 174, 1);
+        background: linear-gradient(180deg, rgba(195, 229, 174, 1) 37%, rgba(216, 210, 203, 1) 100%);
+    }
+
+    div.loisirs>ol>li:nth-child(3)>i {
+        text-align: left;
+        
+    }
+    .loisirs a:hover{
+        color: red;
+    }
+
+}
+
+/**************************/
+/******** END  CV *********/
+/**************************/
+
+
+
+
+
+
+
+
+
+/**************************/
+/****** START  TEAM *******/
+/**************************/
+
+
+.equipe {
+    background-color: var(--backgroundColor_main);
+}
+
+.equipe h1 {
+    text-align: center;
+    color: black;
+}
+
+.equipe h2 {
+    color: var(--ColorTitle);
+    margin: 0;
+}
+
+.equipe fieldset {
+    border: 0.5px solid var(--backgroundColor_main);
+    border-radius: var(--boderRadius_min);
+}
+
+.equipe section {
+    background-color: var(--backgroundColor_section);
+    border-radius: var(--boderRadius_max);
+    width: 1100px;
+    margin: auto;
+}
+
+/** PRÉSENTATION **/
+
+.equipe section {
+    margin-top: 1rem;
+    padding: 1rem;
+    position: relative;
+}
+
+.equipe p {
+    padding: 1rem;
+    background-color: var(--backgroundColor_main);
+    align-self: center;
+    margin: 0.5rem;
+    border-radius: var(--boderRadius_min);
+}
+
+.equipe>section>div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.equipeFlexReverse {
+    flex-direction: row-reverse;
+}
+
+.equipeFlex {
+    flex-direction: row;
+}
+
+
+.equipe q {
+    font-style: italic;
+}
+
+/** IMAGE **/
+
+.equipe img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    border-radius: 50%;
+    filter: sepia();
+    border: 2px solid var(--backgroundColor_FHLB);
+    transition: 1s filter;
+}
+
+.equipe img:hover {
+    filter: none;
+    border: 2px solid var(--ColorTitle);
+    transition: 1s filter;
+}
+
+
+/** LIEN **/
+
+
+.equipe a:hover {
+    box-shadow: 0px 0px 10px 5px white;
+    background-color: #398AB9;
+    border: 1 #1C658C solid;
+    transform: scale(1.1);
+
+}
+
+.equipe a {
+    box-sizing: border-box;
+    padding: 0.5% 1% 0.5% 1%;
+    background-color: #1C658C;
+    border: 1px white solid;
+    color: white;
+    border-radius: 5px;
+    font-family: var(--PoliceTitle);
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 1rem;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    text-transform: uppercase;
+}
+
+.equipe hr {
+    margin-bottom: 1rem;
+}
+
+
+@media (max-width : 1150px) {
+    .equipe section {
+        width: 800px;
+    }
+
+}
+
+
+/**************************/
+/******* END  TEAM ********/
+/**************************/
+
+
+
+
+/**************************/
+/**************************/
+/********* @MEDIA *********/
+/**************************/
+/**************************/
+
+
+@media (max-width : 880px) {
+
+
+
+
+    /**************************/
+    /****** START  TEAM *******/
+    /**************************/
+
+    .equipe>section>div {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .equipe section {
+        width: 90%;
+    }
+
+    .equipe hr {
+        position: absolute;
+        width: 80%;
+        top: 2.5rem;
+    }
+
+    .equipe a {
+        bottom: auto;
+        top: 1rem;
+    }
+
+    .equipe img {
+        width: 75px;
+        height: 75px;
+        z-index: 1;
+    }
+}
+
+    /**************************/
+    /******* END  TEAM ********/
+    /**************************/
