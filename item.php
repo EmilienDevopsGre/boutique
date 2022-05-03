@@ -5,7 +5,6 @@ require "header.php";
 $name = 'Oeufs frais';
 $price = '5€';
 $image = "Static/img/imgProduit/oeufs.jpg";
-$image = __DIR__ . "Static/img/imgProduit/oeufs.jpg";
 
 //echo $name . $price . '<img src="' . $image . '">';
 
@@ -20,7 +19,7 @@ $image = __DIR__ . "Static/img/imgProduit/oeufs.jpg";
     <!-- PRODUCT RELATED START -->
     <section class="row">
         <div class="col-12 col-md-6">
-            <?php echo '<img src="' . $image . '" class="img-fluid" alt="photo du produit">' ?>
+            <img src= "<?php echo $image ?>" class="img-fluid" alt="photo du produit">
         </div>
         <div class="col-6 col-md-2 align-self-center">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero esse laborum vel commodi aliquid eum hic
