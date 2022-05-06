@@ -1,4 +1,7 @@
 <?php
+
+require 'my-functions.php';
+
 $chaise = [
     "name" => "chaise",
     "price" => 50,
@@ -35,7 +38,8 @@ require "header.php";
                         <img src="<?php echo $beezwrap["picture_url"]; ?>" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"> <?php echo $beezwrap["name"]; ?></h5>
-                            <p>Prix : <?php echo $beezwrap["price"]; ?> </p>
+                            <p>Prix TTC : <?php echo formatPrice(discountedPrice($beezwrap["price"],$beezwrap["discount"])); ?> </p>
+                            <p>Prix HT : <?php echo formatPrice((discountedPrice(priceExcludingVAT($beezwrap["price"]),$beezwrap["discount"]))); ?> </p>
                             <p>Remise : <?php echo $beezwrap["discount"]; ?></p>
                             <p>Poids : <?php echo $beezwrap["weight"]; ?></p>
                         </div>
@@ -48,7 +52,8 @@ require "header.php";
                         <img src="<?php echo $chaise["picture_url"]; ?>" class="card-img-top img-responsive" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"> <?php echo $chaise["name"]; ?></h5>
-                            <p>Prix : <?php echo $chaise["price"]; ?> </p>
+                            <p>Prix TTC : <?php echo formatPrice(discountedPrice($chaise["price"],$chaise["discount"])); ?> </p>
+                            <p>Prix HT : <?php echo formatPrice((discountedPrice(priceExcludingVAT($chaise["price"]),$chaise["discount"]))); ?> </p>
                             <p>Remise : <?php echo $chaise["discount"]; ?></p>
                             <p>Poids : <?php echo $chaise["weight"]; ?></p>
                         </div>
@@ -61,7 +66,8 @@ require "header.php";
                         <img src="<?php echo $oranges["picture_url"]; ?>" class="card-img-top img-responsive" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"> <?php echo $oranges["name"]; ?></h5>
-                            <p>Prix : <?php echo $oranges["price"]; ?> </p>
+                            <p>Prix TTC : <?php echo formatPrice(discountedPrice($oranges["price"],$oranges["discount"])); ?> </p>
+                            <p>Prix HT : <?php echo formatPrice((discountedPrice(priceExcludingVAT($oranges["price"]),$oranges["discount"]))); ?> </p>
                             <p>Remise : <?php echo $oranges["discount"]; ?></p>
                             <p>Poids : <?php echo $oranges["weight"]; ?></p>
                         </div>
