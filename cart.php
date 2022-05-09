@@ -1,7 +1,10 @@
+
 <?php
 
+require "arrayproducts.php";
+
 $order=$_POST["quantity"];
-var_dump($_POST);
+//var_dump($_POST);
 ?>
 
 <table>
@@ -11,17 +14,31 @@ var_dump($_POST);
         <th>Prix avant discount</th>
         <th>Prix après discount</th>
     </tr>
+
+
+    <?php
+    foreach ($order as $key_name => $quantity) {
+        //var_dump($order);
+        ?>
+        <tr>
+            <?php
+            //echo '<td>' . $key_name . '</td> <td>' . $quantity . '</td>';
+            echo $products[$key_name]["price"];
+            //var_dump($_POST[$quantity][$key_name]);
+            //var_dump($_POST);
+            //echo '<td>' . $key_name . '</td> <td>' . $quantity . '</td>';
+            ?>
+        </tr>
         <?php
-foreach ($order as $key_name => $quantity) {
-    var_dump($order);
+    }
     ?>
     <tr>
-    <?php
-    echo '<td>' . $key_name . '</td> <td>' . $quantity . '</td>';
-    echo '<td>' . $key_name . '</td> <td>' . $quantity . '</td>';
-    ?>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>TVA</th>
     </tr>
-    <?php
-}
-?>
 </table>
+
+
+

@@ -13,3 +13,4 @@ function discountedPrice($price, $discount):float
 {
     return $price - ($price*($discount/100));
 }
+
