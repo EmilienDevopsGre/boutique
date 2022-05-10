@@ -17,8 +17,9 @@ echo '<div class="row row-cols-1 row-cols-md-3 g-4 mb-5" id="products">';
 foreach ($products as $value) {
 
 //    echo '<pre>';
-//    var_dump($key);
+//    var_dump($_POST);
 //    echo '</pre>';
+
     echo '<div class="col">';
     //echo '<a href="page_produit.html">';
     echo '<div class="card text-center">';
@@ -33,6 +34,7 @@ foreach ($products as $value) {
     echo '<p>Remise : ' . $value["discount"] . '</p>';
     echo '<p>Poids : ' . $value["weight"] . '</p>';
     echo '<input type="number" name="quantity[' . $value['name'] . '] quantity' . '" value = "0">';
+    //if quantity
     echo '<input type="submit" value="Ajouter au panier" />';
     echo '</div></div></a></div>';
 

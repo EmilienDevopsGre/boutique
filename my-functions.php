@@ -14,3 +14,7 @@ function discountedPrice($price, $discount):float
     return $price - ($price*($discount/100));
 }
 
+function totalItem($pDiscountedPrice, $pQuantity):float
+{
+    return $pDiscountedPrice*$pQuantity;
+}
