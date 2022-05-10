@@ -18,3 +18,17 @@ function totalItem($pDiscountedPrice, $pQuantity):float
 {
     return $pDiscountedPrice*$pQuantity;
 }
+
+function weigthtItems($pWeight, $pQuantity):float
+{
+    return $pWeight*$pQuantity;
+}
+
+
+function test_input($data): string
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}

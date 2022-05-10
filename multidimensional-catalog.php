@@ -26,14 +26,19 @@ foreach ($products as $value) {
     echo '<img src="' . $value ["picture_url"] . '"class="card-img-top" alt="...">';
     echo '<div class="card-body">';
     echo '<input type="hidden" name="name[' . $value['name'] . ']"> <h5 class="card-title">' . $value["name"] . '</h5>';
-    echo '<input type="hidden" name="Prix unitaire avant discount[' . $value['name'] . ']"><p style="color: red" ><del> ' . formatPrice($value["price"]) . '</del></p>';
-    echo '<input type="hidden" name="Prix unitaire après discount[' . $value['name'] . ']"><p>Prix TTC après discount : ' . formatPrice(discountedPrice($value["price"],$value["discount"])) . '</p>';
+    if (is_int($value["discount"])){
+        echo '<p style="color: red" ><del> ' . formatPrice($value["price"]) . '</del></p>';
+        echo '<p>Remise : ' . $value["discount"] . '</p>';
+        echo '<p>Prix TTC après discount : ' . formatPrice(discountedPrice($value["price"],$value["discount"])) . '</p>';
+    }else{
+        echo '<p>' . formatPrice($value["price"]) . '</p>';
+    }
     echo '<p>Prix HT : ' . formatPrice(discountedPrice(priceExcludingVAT($value["price"]),$value["discount"])) . '</p>';
     $montantTva = formatPrice((discountedPrice($value["price"],$value["discount"])) - (discountedPrice(priceExcludingVAT($value["price"]),$value["discount"])));
-    echo '<input type="hidden" name="TVA[' . $value['name'] . ']"><p>TVA : ' . $montantTva . '</p>';
-    echo '<p>Remise : ' . $value["discount"] . '</p>';
+    echo '<p>TVA : ' . $montantTva . '</p>';
+
     echo '<p>Poids : ' . $value["weight"] . '</p>';
-    echo '<input type="number" name="quantity[' . $value['name'] . '] quantity' . '" value = "0">';
+    echo '<input type="number" name="quantity[' . $value['name'] . ']" value = "0">';
     //if quantity
     echo '<input type="submit" value="Ajouter au panier" />';
     echo '</div></div></a></div>';
