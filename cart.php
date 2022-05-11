@@ -1,17 +1,22 @@
-<?php
+<?php session_start();
 require "header.php";
 require "arrayproducts.php";
-
 require "my-functions.php";
 
-global $products;
 
+global $products;
 $productsCarts = [];
 $error=[];
-if (isset($_POST)) { //vérifie s'il y a quelque chose dans le post (un envoi de form)
-    foreach ($_POST['quantity'] as $keyPOST => $valuePOST) {//pour chaque case key=name(de order) value=quantity(de order)
-        $nbrProducts = count($products); //la variable regarde le nombre de produits existants
-        $productFind = false; //initialise une variable pour vérifier si le produit est retrouvé
+$nbrProducts = count($products); //la variable regarde le nombre de produits existants
+$productFind = false; //initialise une variable pour vérifier si le produit est retrouvé
+
+
+if (!isset($_SESSION['quantity'])) {
+    $_SESSION['quantity'] = $_POST['quantity'];
+}
+
+if (isset($_SESSION)) { //vérifie s'il y a quelque chose dans le post (un envoi de form)
+    foreach ($_SESSION['quantity'] as $keyPOST => $valuePOST) {//pour chaque case key=name(de order) value=quantity(de order)
         foreach ($products as $keyProduct => $valueProduct) {//pour chaque case key=nameP value=arrayInfoP
             $nbrProducts--; //décrémente pour enlever un produit à vérifier à chaque tour
             if ($keyPOST == $keyProduct && intval(test_input($valuePOST)) > 0) { //vérifie si la clé du produit de la commande est présente dans le catalogue et vérifie s'il y a une quantité commandée

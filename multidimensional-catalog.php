@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 
 require 'my-functions.php';
 
@@ -13,7 +13,7 @@ echo '<form method="post" action="cart.php">';
     echo '<div class="row row-cols-1 row-cols-md-3 g-4 mb-5" id="products">';
 
 
-        var_dump($products);
+       // var_dump($products);
         foreach ($products as $value) :
 
         //    echo '<pre>';
@@ -40,7 +40,7 @@ echo '<form method="post" action="cart.php">';
             echo '<p>Poids : ' . $value["weight"] . '</p>';
             echo '<input type="number" name="quantity[' . $value['name'] . ']" value = "0" min="0" max="20" >';
             //if quantity
-
+var_dump($value['name']);
             echo '</div></div></a></div>';
 
         endforeach;

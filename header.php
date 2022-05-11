@@ -159,7 +159,7 @@
             </form>
             <div class="col-md-3 text-end">
 
-                <button type="button" class="btn"><img class="nav2" src="Static/img/panierpic.png"
+                <button type="button" class="btn"><a href="cart.php"><img class="nav2" src="Static/img/panierpic.png"
                                                        alt="iconepanier">Panier
                 </button>
 
@@ -182,22 +182,22 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="page_produit.html">Alimentation</a>
+                        <a class="nav-link active" href="multidimensional-catalog.php">Alimentation</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="page_produit.html">Mobilier Déco</a>
+                        <a class="nav-link active" href="multidimensional-catalog.php">Mobilier Déco</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="page_produit.html">Mode</a>
+                        <a class="nav-link active" href="multidimensional-catalog.php">Mode</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="page_produit.html">Jeux</a>
+                        <a class="nav-link active" href="multidimensional-catalog.php">Jeux</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="page_produit.html">Electronique</a>
+                        <a class="nav-link active" href="multidimensional-catalog.php">Electronique</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="page_produit.html">Objets cuisine</a>
+                        <a class="nav-link active" href="multidimensional-catalog.php">Objets cuisine</a>
                     </li>
                 </ul>
             </div>
