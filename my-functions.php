@@ -27,8 +27,8 @@ function weigthtItems($pWeight, $pQuantity):float
 
 function test_input($data): string
 {
-    $data = trim($data);
-    $data = stripslashes($data);
+//    $data = trim($data);
+//    $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
 }
