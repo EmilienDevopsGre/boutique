@@ -18,10 +18,10 @@ if (isset($_POST)) { //vérifie s'il y a quelque chose dans le post (un envoi de
                 $productsCarts[$keyPOST] = $valueProduct; // reprend le tableau initialisé au début avec en index la clé du produit commandé, on lui assigne les valeurs du produit présentes dans le catalogue
                 $productsCarts[$keyPOST]['quantity'] = $valuePOST; //on ajoute une nouvelle entrée qui contient la quantité
                 $productFind = true;//on affirme que le produit est trouvé
-            } elseif (intval(test_input($valuePOST)) < 0 || intval(test_input($valuePOST)) > 20 || !is_int(test_input($valuePOST))) {//on nettoie les valeurs (test_input) puis on convertit la chaine de caractères en int (intval) et on regarde si la quantité rentre dans les limites
-                $error[0] .= " Vous n'avez pas commandé une quantité valide ";
+            } elseif (intval(test_input($valuePOST)) < 0 || intval(test_input($valuePOST)) > 20 || !is_int(intval(test_input($valuePOST)))) {//on nettoie les valeurs (test_input) puis on convertit la chaine de caractères en int (intval) et on regarde si la quantité rentre dans les limites
+                $error[] .= " Vous n'avez pas commandé une quantité valide ";
             } elseif ($nbrProducts == 0 && intval(test_input($valuePOST)) > 0 && !$productFind) { //s'il n'y a plus de produits à parcourir et qu'il y a une quantité mais qu'il n'a pas trouvé de produit
-                $error[0] .= " Vous n'avez pas commandé un produit valide ";
+                $error[] .= " Vous n'avez pas commandé un produit valide ";
             }
         }
     }
