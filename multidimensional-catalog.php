@@ -13,7 +13,7 @@ echo '<form method="post" action="cart.php">';
     echo '<div class="row row-cols-1 row-cols-md-3 g-4 mb-5" id="products">';
 
 
-        var_dump($products);
+//        var_dump($products);
         foreach ($products as $value) :
 
         //    echo '<pre>';
