@@ -3,27 +3,31 @@ require "header.php";
 require "arrayproducts.php";
 
 require "my-functions.php";
-$name = $quantity = "";
+
 global $products;
 
 $productsCarts = [];
-if (isset($_POST)) {
-    foreach ($_POST['quantity'] as $keyPOST => $valuePOST) {//pour chaque case key=nameP value=quantityP
-        $nbrProducts = count($products);
-        $productFind = false;
+$error=[];
+if (isset($_POST)) { //vérifie s'il y a quelque chose dans le post (un envoi de form)
+    foreach ($_POST['quantity'] as $keyPOST => $valuePOST) {//pour chaque case key=name(de order) value=quantity(de order)
+        $nbrProducts = count($products); //la variable regarde le nombre de produits existants
+        $productFind = false; //initialise une variable pour vérifier si le produit est retrouvé
         foreach ($products as $keyProduct => $valueProduct) {//pour chaque case key=nameP value=arrayInfoP
-            $nbrProducts--;
-            if ($keyPOST == $keyProduct && intval(test_input($valuePOST)) > 0) {
-                $productsCarts[$keyPOST] = $valueProduct;
-                $productsCarts[$keyPOST]['quantity'] = $valuePOST;
-                $productFind = true;
-            } elseif (intval(test_input($valuePOST)) < 0 || intval(test_input($valuePOST)) > 20) {
-                echo '<div class="alert alert-danger" role="alert">Vous n\'avez pas commandé une quantité valide</div>';
-            } elseif ($nbrProducts == 0 && intval(test_input($valuePOST)) > 0 && !$productFind) {
-                echo '<div class="alert alert-danger" role="alert">Vous n\'avez pas commandé un produit valide</div>';
+            $nbrProducts--; //décrémente pour enlever un produit à vérifier à chaque tour
+            if ($keyPOST == $keyProduct && intval(test_input($valuePOST)) > 0) { //vérifie si la clé du produit de la commande est présente dans le catalogue et vérifie s'il y a une quantité commandée
+                $productsCarts[$keyPOST] = $valueProduct; // reprend le tableau initialisé au début avec en index la clé du produit commandé, on lui assigne les valeurs du produit présentes dans le catalogue
+                $productsCarts[$keyPOST]['quantity'] = $valuePOST; //on ajoute une nouvelle entrée qui contient la quantité
+                $productFind = true;//on affirme que le produit est trouvé
+            } elseif (intval(test_input($valuePOST)) < 0 || intval(test_input($valuePOST)) > 20 || !is_int(test_input($valuePOST))) {//on nettoie les valeurs (test_input) puis on convertit la chaine de caractères en int (intval) et on regarde si la quantité rentre dans les limites
+                $error[0] .= " Vous n'avez pas commandé une quantité valide ";
+            } elseif ($nbrProducts == 0 && intval(test_input($valuePOST)) > 0 && !$productFind) { //s'il n'y a plus de produits à parcourir et qu'il y a une quantité mais qu'il n'a pas trouvé de produit
+                $error[0] .= " Vous n'avez pas commandé un produit valide ";
             }
         }
     }
+}
+if (!empty($error)) {
+    echo '<div class="alert alert-danger" role="alert">' . $error[0] . '</div>';
 }
 ?>
 <table>
@@ -48,7 +52,7 @@ if (isset($_POST)) {
             echo '<td>' . formatPrice(discountedPrice($value["price"], $value["discount"])) . '</td>';
             echo '<td>' . formatPrice(totalItem(discountedPrice($value["price"], $value["discount"]), $value['quantity'])) . '</td>';
             $total += totalItem(discountedPrice($value["price"], $value["discount"]), $value['quantity']);
-            += weigthtItems($value["weight"], $value['quantity']);
+            $totalWeight += weigthtItems($value["weight"], $value['quantity']);
             ?>
         </tr>
     <?php endforeach; ?>
