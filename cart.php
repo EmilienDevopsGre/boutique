@@ -16,21 +16,36 @@ if (!isset($_SESSION['quantity'])) {
 }
 
 if (isset($_SESSION)) { //vérifie s'il y a quelque chose dans le post (un envoi de form)
-    foreach ($_SESSION['quantity'] as $keyPOST => $valuePOST) {//pour chaque case key=name(de order) value=quantity(de order)
-        foreach ($products as $keyProduct => $valueProduct) {//pour chaque case key=nameP value=arrayInfoP
-            $nbrProducts--; //décrémente pour enlever un produit à vérifier à chaque tour
-            if ($keyPOST == $keyProduct && intval(test_input($valuePOST)) > 0) { //vérifie si la clé du produit de la commande est présente dans le catalogue et vérifie s'il y a une quantité commandée
-                $productsCarts[$keyPOST] = $valueProduct; // reprend le tableau initialisé au début avec en index la clé du produit commandé, on lui assigne les valeurs du produit présentes dans le catalogue
-                $productsCarts[$keyPOST]['quantity'] = $valuePOST; //on ajoute une nouvelle entrée qui contient la quantité
-                $productFind = true;//on affirme que le produit est trouvé
-            } elseif (intval(test_input($valuePOST)) < 0 || intval(test_input($valuePOST)) > 20 || !is_int(intval(test_input($valuePOST)))) {//on nettoie les valeurs (test_input) puis on convertit la chaine de caractères en int (intval) et on regarde si la quantité rentre dans les limites
-                $error[] .= " Vous n'avez pas commandé une quantité valide ";
-            } elseif ($nbrProducts == 0 && intval(test_input($valuePOST)) > 0 && !$productFind) { //s'il n'y a plus de produits à parcourir et qu'il y a une quantité mais qu'il n'a pas trouvé de produit
-                $error[] .= " Vous n'avez pas commandé un produit valide ";
+    foreach ($_SESSION['quantity'] as $key => $value) {
+        $productName = test_input($key);
+        $productQuantity = intval(test_input($value));
+        if (array_key_exists($productName,$products)) {
+            if ($productQuantity > 0 && $productQuantity <= 20){
+                $productsCarts[$productName] = $products[$productName];
+                $productsCarts[$productName]['quantity'] = $productQuantity;
+
             }
+        } else {
+            $error[] .= " Vous n'avez pas commandé un produit valide: $productName n'existe pas ";
         }
     }
+} else {
+    echo "Votre panier est vide.";
 }
+//        foreach ($products as $keyProduct => $product) {//pour chaque case key=nameP value=arrayInfoP
+//            $nbrProducts--; //décrémente pour enlever un produit à vérifier à chaque tour
+//            if ($productName === $keyProduct && intval(test_input($productQuantity)) > 0) { //vérifie si la clé du produit de la commande est présente dans le catalogue et vérifie s'il y a une quantité commandée
+//                $productsCarts[$productName] = $product; // reprend le tableau initialisé au début avec en index la clé du produit commandé, on lui assigne les valeurs du produit présentes dans le catalogue
+//                $productsCarts[$productName]['quantity'] = $productQuantity; //on ajoute une nouvelle entrée qui contient la quantité
+//                $productFind = true;//on affirme que le produit est trouvé
+//            } elseif (intval(test_input($productQuantity)) < 0 || intval(test_input($productQuantity)) > 20 || !is_int(intval(test_input($productQuantity)))) {//on nettoie les valeurs (test_input) puis on convertit la chaine de caractères en int (intval) et on regarde si la quantité rentre dans les limites
+//                $error[] .= " Vous n'avez pas commandé une quantité valide ";
+//            } elseif ($nbrProducts == 0 && intval(test_input($productQuantity)) > 0 && !$productFind) { //s'il n'y a plus de produits à parcourir et qu'il y a une quantité mais qu'il n'a pas trouvé de produit
+//                $error[] .= " Vous n'avez pas commandé un produit valide "; //TODO array_key_exist
+//            }
+//        }
+
+
 if (!empty($error)) {
     echo '<div class="alert alert-danger" role="alert">' . $error[0] . '</div>';
 }
