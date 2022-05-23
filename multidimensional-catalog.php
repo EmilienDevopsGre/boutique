@@ -4,6 +4,28 @@ require 'my-functions.php';
 require "header.php";
 require "arrayproducts.php";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
 global $products;
 
 echo '<form method="post" action="cart.php">';
@@ -47,3 +69,4 @@ echo '</form>';
 
 require "footer.php";
 
+*/

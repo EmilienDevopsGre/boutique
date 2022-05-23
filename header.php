@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="fr">
 
+<?php
+require_once 'database.php';
+?>
+
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">

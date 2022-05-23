@@ -1,5 +1,13 @@
 <?php
+require 'header.php';
+global $db;
 
+
+displayProducts($db);
+
+
+
+/*
 $products = [
 
     'chaise' => [
@@ -30,3 +38,6 @@ $products = [
         "picture_url" => "https://c-pi.niceshops.com/upload/image/product/medium/default/bees-wrap-vegan-lot-de-7-1-kits-813914-fr.jpg"
     ],
 ];
+
+*/
+
