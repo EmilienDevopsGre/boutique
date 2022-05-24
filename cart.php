@@ -1,20 +1,21 @@
 <?php session_start();
-require "header.php";
-require "arrayproducts.php";
-require "my-functions.php";
+require_once "header.php";
+require_once "arrayproducts.php";
+require_once "my-functions.php";
 
 
-global $products;
+global $dbProducts;
 $productsCarts = [];
 $error = [];
-$nbrProducts = count($products); //la variable regarde le nombre de produits existants
-$productFind = false; //initialise une variable pour vérifier si le produit est retrouvé
+$nbrProducts = count($dbProducts); //la variable regarde le nombre de produits existants
+//$productFind = false; //initialise une variable pour vérifier si le produit est retrouvé
 
-
+//var_dump($_SESSION['quantity']);
 if (empty($_POST) && empty($_SESSION)) {
     echo "Votre panier est vide.";
     //$_POST['quantity']=0;
 } else {
+
 
     if (isset($_POST['quantity'])) {
         //TODO ajouter les nouveaux produits aux anciens dans le panier
@@ -22,14 +23,19 @@ if (empty($_POST) && empty($_SESSION)) {
     }
 
     foreach ($_SESSION['quantity'] as $key => $value) {
+
         $productName = test_input($key);
+
         $productQuantity = intval(test_input($value));
-        if (array_key_exists($productName, $products)) {
+
+
+        if (array_key_exists($productName, $dbProducts)) {
             if ($productQuantity > 0 && $productQuantity <= 20) {
-                $productsCarts[$productName] = $products[$productName];
+                $productsCarts[$productName] = $dbProducts[$productName];
                 $productsCarts[$productName]['quantity'] = $productQuantity;
 
             }
+
         } else {
             $error[] .= " Vous n'avez pas commandé un produit valide: $productName n'existe pas ";
         }

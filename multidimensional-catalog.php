@@ -1,43 +1,27 @@
 <?php session_start();
 
-require 'my-functions.php';
-require "header.php";
-require "arrayproducts.php";
+require_once 'my-functions.php';
+require_once "header.php";
+require_once "arrayproducts.php";
+require_once "database.php";
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-global $products;
-
+global $dbProducts;
+//echo '<pre>',var_dump($dbProducts), '<pre>';
 echo '<form method="post" action="cart.php">';
 
     echo '<div class="row row-cols-1 row-cols-md-3 g-4 mb-5" id="products">';
 
-        foreach ($products as $value) :
+        foreach ($dbProducts as $value) :
+//            foreach ($value as $item => $name) :
+//                echo '<pre>',var_dump($item), '<pre>';die();
+
 
             echo '<div class="col">';
             //echo '<a href="page_produit.html">';
             echo '<div class="card text-center">';
-            echo '<img src="' . $value ["picture_url"] . '"class="card-img-top" alt="...">';
+            echo '<img src="' . $value ["img_url"] . '"class="card-img-top" alt="...">';
             echo '<div class="card-body">';
             echo '<h5 class="card-title">' . $value["name"] . '</h5>';
             if (is_int($value["discount"])) {
@@ -56,6 +40,7 @@ echo '<form method="post" action="cart.php">';
 
             echo '</div></div></a></div>';
 
+//            endforeach;
         endforeach;
 echo '<input type="submit" value="Ajouter au panier" />';
 
@@ -69,4 +54,3 @@ echo '</form>';
 
 require "footer.php";
 
-*/

@@ -95,6 +95,14 @@ function displayProducts($db): array
     $query = "SELECT * FROM bdd_boutique_amazen.products";
     $amazenStatement = $db->prepare($query);
     $amazenStatement->execute();
+    $tabInterm = $amazenStatement->fetchAll(PDO::FETCH_ASSOC);
+    $finalArray = [];
+    foreach ($tabInterm as $item) {
+        $finalArray[$item['name']] = $item;
+    }
 
-    return $amazenStatement->fetchAll(PDO::FETCH_ASSOC);
+    //var_dump($finalArray);
+    return $finalArray;
 }
+
+displayProducts($db);
