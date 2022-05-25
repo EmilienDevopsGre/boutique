@@ -26,10 +26,12 @@ function weigthtItems($pWeight, $pQuantity): float
 }
 
 
-function test_input($data): string
+function test_input(string $data): string
 {
 //    $data = trim($data);
 //    $data = stripslashes($data);
+//    var_dump($data);
+//    die;
     $data = htmlspecialchars($data);
     return $data;
 }
