@@ -11,6 +11,15 @@ function productsName(PDO $db): array
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function listProducts(PDO $db): array
+{
+    $query = $db->prepare('SELECT name, price, weight, discount, picture_url FROM products');
+    $query->execute();
+
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 function lastTenOrders(PDO $db): array
 {
     $query = $db->prepare('SELECT number FROM orders WHERE date > CURDATE() - 10');

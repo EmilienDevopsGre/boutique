@@ -1,3 +1,4 @@
+<?php require_once 'database.php';?>
 <!doctype html>
 <html lang="fr">
 
@@ -23,7 +24,7 @@
 
     <div class="container-fluid">
         <header class="d-flex flex-wrap align-items-center justify-content-around justify-content-md-around py-3">
-            <a href="index.html"><img class="navlogo" src="Static/img/LOGO_AMAZEN-1.avif" alt="logo"></a>
+            <a href="index.php"><img class="navlogo" src="Static/img/LOGO_AMAZEN-1.avif" alt="logo"></a>
             <div class="col-md-3">
 
                 <!-- Button trigger modal -->
@@ -159,10 +160,11 @@
             </form>
             <div class="col-md-3 text-end">
 
-                <button type="button" class="btn"><img class="nav2" src="Static/img/panierpic.png"
-                                                       alt="iconepanier">Panier
+                <a href="cart.php">
+                <button type="button" class="btn">
+                     <img class="nav2" src="Static/img/panierpic.png" alt="iconepanier">Panier
                 </button>
-
+                </a>
                 <button type="button" class="btn"> <img class="nav3" src="Static/img/comptepic.png"
                                                         alt="iconecompte"> Mon
                     compte</button>
@@ -182,22 +184,22 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="page_produit.html">Alimentation</a>
+                        <a class="nav-link active" href="multidimensional-catalog.php">Alimentation</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="page_produit.html">Mobilier Déco</a>
+                        <a class="nav-link active" href="multidimensional-catalog.php">Mobilier Déco</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="page_produit.html">Mode</a>
+                        <a class="nav-link active" href="multidimensional-catalog.php">Mode</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="page_produit.html">Jeux</a>
+                        <a class="nav-link active" href="multidimensional-catalog.php">Jeux</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="page_produit.html">Electronique</a>
+                        <a class="nav-link active" href="multidimensional-catalog.php">Electronique</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="page_produit.html">Objets cuisine</a>
+                        <a class="nav-link active" href="multidimensional-catalog.php">Objets cuisine</a>
                     </li>
                 </ul>
             </div>

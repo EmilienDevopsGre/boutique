@@ -1,24 +1,16 @@
 <?php
 
-require 'my-functions.php';
+require_once 'my-functions.php';
+require_once "header.php";
+require_once "arrayproducts.php";
 
-
-require "header.php";
-
-require "arrayproducts.php";
 global $products;
 
 echo '<form method="post" action="cart.php">';
 
     echo '<div class="row row-cols-1 row-cols-md-3 g-4 mb-5" id="products">';
 
-
-        var_dump($products);
         foreach ($products as $value) :
-
-        //    echo '<pre>';
-        //    var_dump($_POST);
-        //    echo '</pre>';
 
             echo '<div class="col">';
             //echo '<a href="page_produit.html">';

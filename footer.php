@@ -5,9 +5,9 @@
             <ul class="nav flex-column">
                 <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">A propos d'Amazen</a>
                 </li>
-                <li class="nav-item mb-2"><a href="equipe.html" class="nav-link p-0 text-muted">Equipe</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Equipe</a></li>
                 <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Durabilité</a></li>
-                <li class="nav-item mb-2"><a href="producteur.html" class="nav-link p-0 text-muted">Les
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Les
                         producteurs et
                         vendeurs</a></li>
             </ul>
@@ -27,7 +27,7 @@
             <h5>Aide</h5>
             <ul class="nav flex-column">
                 <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Forum général</a></li>
-                <li class="nav-item mb-2"><a href="contact.html" class="nav-link p-0 text-muted">Contact</a>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Contact</a>
                 </li>
             </ul>
         </div>

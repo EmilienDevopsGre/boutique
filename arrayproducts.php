@@ -1,5 +1,10 @@
 <?php
 
+require_once 'database.php';
+global $db;
+
+$productsSql = listProducts($db);
+
 $products = [
 
     'chaise' => [

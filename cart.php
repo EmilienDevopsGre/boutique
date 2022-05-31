@@ -1,8 +1,7 @@
 <?php
-require "header.php";
-require "arrayproducts.php";
-
-require "my-functions.php";
+require_once "header.php";
+require_once "arrayproducts.php";
+require_once "my-functions.php";
 
 global $products;
 
