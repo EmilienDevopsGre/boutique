@@ -97,7 +97,7 @@ function deleteCustWithoutOrder(PDO $db): void
 
 function orderNumber(PDO $db):int
 {
-    $findNumberInA= "SELECT order_id from order_product";
+    $findNumberInA= "SELECT number from orders";
 
     $amazenStatement = $db->prepare($findNumberInA);
     $amazenStatement->execute();
@@ -120,8 +120,7 @@ function orderNumber(PDO $db):int
 function newOrder(PDO $db, array $aIdsProQty, string $totalTTC): void
 {
 
-    $query = "
-    INSERT INTO `orders` (`number`, `date`, `total`) VALUES(:number, NOW(), :pTotalTTC)";
+    $query = "INSERT INTO `orders` (`number`, `date`, `total`) VALUES(:number, NOW(), :pTotalTTC)";
     $amazenStatement = $db->prepare($query);
     $amazenStatement->bindValue(':pTotalTTC', $totalTTC);
     $amazenStatement->bindValue(':number', orderNumber($db));
