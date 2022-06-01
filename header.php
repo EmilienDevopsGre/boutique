@@ -28,7 +28,7 @@ require_once 'database.php';
 
     <div class="container-fluid">
         <header class="d-flex flex-wrap align-items-center justify-content-around justify-content-md-around py-3">
-            <a href="index.html"><img class="navlogo" src="Static/img/LOGO_AMAZEN-1.avif" alt="logo"></a>
+            <a href="index.php"><img class="navlogo" src="Static/img/LOGO_AMAZEN-1.avif" alt="logo"></a>
             <div class="col-md-3">
 
                 <!-- Button trigger modal -->
