@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 require_once 'connect.php';
 global $db;
 
@@ -118,7 +120,7 @@ INSERT INTO `order_product` (order_id, `product_id`, `quantity`) VALUES(?, ?, ?)
 
 function displayProducts(PDO $db): array
 {
-    $query = "SELECT * FROM bdd_boutique_amazen.products";
+    $query = "SELECT * FROM products";
     $amazenStatement = $db->prepare($query);
     $amazenStatement->execute();
     $tabInterm = $amazenStatement->fetchAll(PDO::FETCH_ASSOC);
