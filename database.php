@@ -150,36 +150,9 @@ function displayProducts(PDO $db): array
     foreach ($tabInterm as $item) {
         $finalArray[$item['id']] = $item;
     }
-
-    // var_dump($finalArray);
     return $finalArray;
 }
 
 displayProducts($db);
 
 
-function getCartFromSession(): array
-{
-    global $db;
-    $cart = [];
-    foreach ($_SESSION['cart'] ?? [] as $id => $quantity) {
-        if (intval($quantity) < 1) {
-            continue;
-        }
-        // récupération produit depuis la BDD
-        $queryStatement = $db->prepare('SELECT * FROM products where ID=:id');
-        $queryStatement->bindValue('id', $id, PDO::PARAM_INT);
-        $queryStatement->execute();
-        $product = $queryStatement->fetch(PDO::FETCH_ASSOC);
-        array_push($cart, [
-            'product' => $product,
-            'quantity' => $quantity
-        ]);
-    }
-//        else{
-//            array_push($cart, [
-//                'quantity' => $qt
-//            ]);
-//        }
-    return $cart;
-}

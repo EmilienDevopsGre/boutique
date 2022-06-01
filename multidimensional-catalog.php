@@ -14,9 +14,6 @@ echo '<form method="post" action="cart.php">';
     echo '<div class="row row-cols-1 row-cols-md-3 g-4 mb-5" id="products">';
 
         foreach ($dbProducts as $value) :
-//            foreach ($value as $item => $name) :
-//                echo '<pre>',var_dump($item), '<pre>';die();
-
 
             echo '<div class="col">';
             //echo '<a href="page_produit.html">';
