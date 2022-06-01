@@ -13,11 +13,3 @@ catch (Exception $e)
 {
     die('Erreur : ' . $e->getMessage());
 }
- /*
-$amazenStatement = $db->prepare('SELECT * FROM categories ');
-$amazenStatement->execute();
-$categories = $amazenStatement->fetchAll();
-echo '<pre>';
-print_r($categories);
-echo '</pre>';
-*/

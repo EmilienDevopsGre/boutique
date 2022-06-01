@@ -9,21 +9,27 @@ global $db;
 global $dbProducts;
 $productsCarts = [];
 $error = [];
-$nbrProducts = count($dbProducts); //la variable regarde le nombre de produits existants
+//la variable regarde le nombre de produits existants
+$nbrProducts = count($dbProducts);
 //$productFind = false; //initialise une variable pour vérifier si le produit est retrouvé
 //var_dump($_POST);
 //var_dump($_SESSION['quantity']);
 if (isset($_POST['quantity'])) {
-    //TODO ajouter les nouveaux produits aux anciens dans le panier
+    //@TODO ajouter les nouveaux produits aux anciens dans le panier
     $_SESSION['quantity'] = $_POST['quantity'];
 }
-var_dump($_SESSION['quantity']);
-$quantityNotFound=true;
-foreach ($_SESSION as $value) {
-    foreach ($value as $exist) {
-        if ($exist > 0 ) {$quantityNotFound = false;};
-        //var_dump($value);
-    }
+//var_dump($_SESSION['quantity']);
+$quantityNotFound = true;
+foreach ($_SESSION['quantity'] as $key =>$value) {
+////    var_dump($value);
+//    foreach ($value as $exist) {
+        if ($value > 0) {
+            $quantityNotFound = false;
+        } else {
+            unset($_SESSION['quantity'][$key]);
+        }
+//        //var_dump($value);
+//    }
 }
 //var_dump($quantityNotFound);
 if ($quantityNotFound) { //&& empty($_SESSION)
@@ -33,11 +39,12 @@ if ($quantityNotFound) { //&& empty($_SESSION)
 } else {
 
 
-    if (isset($_POST['quantity'])) {
-        //TODO ajouter les nouveaux produits aux anciens dans le panier
-        $_SESSION['quantity'] = $_POST['quantity'];
-    }
+//    if (isset($_POST['quantity'])) {
+//        //TODO ajouter les nouveaux produits aux anciens dans le panier
+//        $_SESSION['quantity'] = $_POST['quantity'];
+//    }
 //var_dump($dbProducts);
+
     foreach ($_SESSION['quantity'] as $key => $value) {
 
         $productId = test_input($key);
@@ -58,12 +65,11 @@ if ($quantityNotFound) { //&& empty($_SESSION)
     }
 
 
-
     if (!empty($error)) {
         echo '<div class="alert alert-danger" role="alert">' . $error[0] . '</div>';
     }
     ?>
-
+    <form method="post" action="placeorder.php">
     <table>
         <tr>
             <th>Produit</th>
@@ -135,26 +141,28 @@ if ($quantityNotFound) { //&& empty($_SESSION)
             <td></td>
             <td></td>
             <th>Total TTC</th>
-            <td><?php echo $totalTTC = formatPrice($total + $shipping) ?></td>
+            <?php $totalTTC = formatPrice($total + $shipping) ?>
+            <input type="hidden" name="totalTTC" value="<?=  $totalTTC ?>" >
+            <td><?= $totalTTC ?></td>
         </tr>
         </tfoot>
     </table>
 
+<!--    --><?php //var_dump($_SESSION); ?>
 
-<form method="post" action="placeorder.php">
-        <input type="hidden" name="validate">
-    <button type="submit"> Passer la commande </button>
-</form>
+        <input type="hidden" name="validate" value="1">
+        <button type="submit"> Passer la commande</button>
+    </form>
 
     <?php
 }
 
 
-    /*
-    function newOrder();
-    if (isset($_POST['placeorder']) && isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-       header('Location: index.php?page=placeorder'); exit;
-    */
+/*
+function newOrder();
+if (isset($_POST['placeorder']) && isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+   header('Location: index.php?page=placeorder'); exit;
+*/
 
 
 require "footer.php";

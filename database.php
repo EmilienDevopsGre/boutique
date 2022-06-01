@@ -13,10 +13,10 @@ function desTodayOrders(PDO $db): array
 
     return $amazenStatement->fetchAll(PDO::FETCH_ASSOC);
 }
+
 //echo '<pre>';
 //print_r(desTodayOrders($db));
 //echo '</pre>';
-
 
 
 //query 4
@@ -30,6 +30,7 @@ function lastTenDaysOrders(PDO $db): array
 
     return $amazenStatement->fetchAll(PDO::FETCH_ASSOC);
 }
+
 //echo '<pre>';
 //print_r(lastTenDaysOrders($db));
 //echo '</pre>';
@@ -46,6 +47,7 @@ function charlizeOrders(PDO $db): array
 
     return $amazenStatement->fetchAll(PDO::FETCH_ASSOC);
 }
+
 //echo '<pre>';
 //print_r(charlizeOrders($db));
 //echo '</pre>';
@@ -62,6 +64,7 @@ function sumOrdersByCustomer(PDO $db): array
 
     return $amazenStatement->fetchAll(PDO::FETCH_ASSOC);
 }
+
 //echo '<pre>';
 //print_r(sumOrdersByCustomer($db));
 //echo '</pre>';
@@ -90,20 +93,26 @@ function deleteCustWithoutOrder(PDO $db): void
 
 //requête pour insérer une commande dans la table orders
 
-function newOrder(PDO $db, int $pShipping , int $pDiscount , float $pTotalTTC, int $pProductID, int $pQuantity): void
+function newOrder(PDO $db, array $aIdsProQty, string $totalTTC): void
 {
-    $query = "//boucle
-INSERT INTO `orders` (`number`, `date`, `total`) VALUES(LAST_INSERT_ID(), current_date, :pTotalTTC);
-INSERT INTO `order_product` (LAST_INSERT_ID(), `product_id`, `quantity`) VALUES(LAST_INSERT_ID(), :pProductID, :pQuantity)";
-    $amazenStatement = $db->prepare($query);
-    $amazenStatement->bindValue(':pShipping', $pShipping);
-    $amazenStatement->bindValue(':pDiscount', $pDiscount);
-    $amazenStatement->bindValue(':pTotalTTC', $pTotalTTC);
-    $amazenStatement->bindValue(':pProductID', $pProductID);
-    $amazenStatement->bindValue(':pQuantity', $pQuantity);
 
+    var_dump($aIdsProQty);
+    $query = "
+INSERT INTO `orders` (`number`, `date`, `total`) VALUES(last_insert_id(), NOW(), :pTotalTTC)";
+    $amazenStatement = $db->prepare($query);
+    $amazenStatement->bindValue(':pTotalTTC', $totalTTC);
 
     $amazenStatement->execute();
+    $amazenStatement->debugDumpParams();
+    $lastOrderId = $db->lastInsertId();
+    foreach ($aIdsProQty as $kid => $Vquantity) {
+        $query = "
+INSERT INTO `order_product` (order_id, `product_id`, `quantity`) VALUES(?, ?, ?)";
+        $amazenStatement = $db->prepare($query);
+
+        $amazenStatement->execute([$lastOrderId, $kid, $Vquantity]);
+        $amazenStatement->debugDumpParams();
+    }
 }
 
 
@@ -123,3 +132,30 @@ function displayProducts(PDO $db): array
 }
 
 displayProducts($db);
+
+
+function getCartFromSession(): array
+{
+    global $db;
+    $cart = [];
+    foreach ($_SESSION['cart'] ?? [] as $id => $quantity) {
+        if (intval($quantity) < 1) {
+            continue;
+        }
+        // récupération produit depuis la BDD
+        $queryStatement = $db->prepare('SELECT * FROM products where ID=:id');
+        $queryStatement->bindValue('id', $id, PDO::PARAM_INT);
+        $queryStatement->execute();
+        $product = $queryStatement->fetch(PDO::FETCH_ASSOC);
+        array_push($cart, [
+            'product' => $product,
+            'quantity' => $quantity
+        ]);
+    }
+//        else{
+//            array_push($cart, [
+//                'quantity' => $qt
+//            ]);
+//        }
+    return $cart;
+}
