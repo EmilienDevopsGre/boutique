@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 require_once 'connect.php';
 global $db;
 
@@ -13,10 +15,10 @@ function desTodayOrders(PDO $db): array
 
     return $amazenStatement->fetchAll(PDO::FETCH_ASSOC);
 }
+
 //echo '<pre>';
 //print_r(desTodayOrders($db));
 //echo '</pre>';
-
 
 
 //query 4
@@ -30,6 +32,7 @@ function lastTenDaysOrders(PDO $db): array
 
     return $amazenStatement->fetchAll(PDO::FETCH_ASSOC);
 }
+
 //echo '<pre>';
 //print_r(lastTenDaysOrders($db));
 //echo '</pre>';
@@ -46,6 +49,7 @@ function charlizeOrders(PDO $db): array
 
     return $amazenStatement->fetchAll(PDO::FETCH_ASSOC);
 }
+
 //echo '<pre>';
 //print_r(charlizeOrders($db));
 //echo '</pre>';
@@ -62,6 +66,7 @@ function sumOrdersByCustomer(PDO $db): array
 
     return $amazenStatement->fetchAll(PDO::FETCH_ASSOC);
 }
+
 //echo '<pre>';
 //print_r(sumOrdersByCustomer($db));
 //echo '</pre>';
@@ -88,28 +93,53 @@ function deleteCustWithoutOrder(PDO $db): void
 }
 
 
+function orderNumber(PDO $db): int
+{
+    $findNumberInA = "SELECT number from orders";
+
+    $amazenStatement = $db->prepare($findNumberInA);
+    $amazenStatement->execute();
+    $result = $amazenStatement->fetchAll(PDO::FETCH_COLUMN);
+
+    $randomOrderNumber = random_int(1, 10000);
+
+    while (in_array($randomOrderNumber, $result)) {
+        $randomOrderNumber = random_int(1, 10000);
+    }
+
+    var_dump($randomOrderNumber);
+
+    return $randomOrderNumber;
+
+}
+
 //requête pour insérer une commande dans la table orders
 
-function newOrder(PDO $db, int $pShipping , int $pDiscount , float $pTotalTTC, int $pProductID, int $pQuantity): void
+function newOrder(PDO $db, array $aIdsProQty, string $totalTTC): void
 {
-    $query = "//boucle
-INSERT INTO `orders` (`number`, `date`, `total`) VALUES(LAST_INSERT_ID(), current_date, :pTotalTTC);
-INSERT INTO `order_product` (LAST_INSERT_ID(), `product_id`, `quantity`) VALUES(LAST_INSERT_ID(), :pProductID, :pQuantity)";
+
+    $query = "
+    INSERT INTO `orders` (`number`, `date`, `total`) VALUES(:number, NOW(), :pTotalTTC)";
     $amazenStatement = $db->prepare($query);
-    $amazenStatement->bindValue(':pShipping', $pShipping);
-    $amazenStatement->bindValue(':pDiscount', $pDiscount);
-    $amazenStatement->bindValue(':pTotalTTC', $pTotalTTC);
-    $amazenStatement->bindValue(':pProductID', $pProductID);
-    $amazenStatement->bindValue(':pQuantity', $pQuantity);
-
-
+    $amazenStatement->bindValue(':pTotalTTC', $totalTTC);
+    $amazenStatement->bindValue(':number', orderNumber($db));
     $amazenStatement->execute();
+
+
+    $lastOrderId = $db->lastInsertId();
+
+    foreach ($aIdsProQty as $kId => $vQuantity) {
+        $query = "
+        INSERT INTO `order_product` (order_id, `product_id`, `quantity`) VALUES(?, ?, ?)";
+        $amazenStatement = $db->prepare($query);
+        $amazenStatement->execute([$lastOrderId, $kId, $vQuantity]);
+    }
 }
 
 
 function displayProducts(PDO $db): array
 {
-    $query = "SELECT * FROM bdd_boutique_amazen.products";
+    $query = "SELECT * FROM products";
     $amazenStatement = $db->prepare($query);
     $amazenStatement->execute();
     $tabInterm = $amazenStatement->fetchAll(PDO::FETCH_ASSOC);
@@ -117,9 +147,7 @@ function displayProducts(PDO $db): array
     foreach ($tabInterm as $item) {
         $finalArray[$item['id']] = $item;
     }
-
-    // var_dump($finalArray);
     return $finalArray;
 }
 
-displayProducts($db);
+
