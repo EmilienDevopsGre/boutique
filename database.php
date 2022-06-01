@@ -93,16 +93,38 @@ function deleteCustWithoutOrder(PDO $db): void
 }
 
 
+
+
+function orderNumber(PDO $db):int
+{
+    $findNumberInA= "SELECT order_id from order_product";
+
+    $amazenStatement = $db->prepare($findNumberInA);
+    $amazenStatement->execute();
+    $result = $amazenStatement->fetchAll(PDO::FETCH_COLUMN);
+
+    $randomOrderNumber = random_int(1, 10000);
+
+    while (in_array($randomOrderNumber, $result)){
+        $randomOrderNumber = random_int(1, 10000);
+    }
+
+    var_dump($randomOrderNumber);
+
+    return $randomOrderNumber;
+
+}
+
 //requête pour insérer une commande dans la table orders
 
 function newOrder(PDO $db, array $aIdsProQty, string $totalTTC): void
 {
 
-    var_dump($aIdsProQty);
     $query = "
-INSERT INTO `orders` (`number`, `date`, `total`) VALUES(last_insert_id(), NOW(), :pTotalTTC)";
+    INSERT INTO `orders` (`number`, `date`, `total`) VALUES(:number, NOW(), :pTotalTTC)";
     $amazenStatement = $db->prepare($query);
     $amazenStatement->bindValue(':pTotalTTC', $totalTTC);
+    $amazenStatement->bindValue(':number', orderNumber($db));
 
     $amazenStatement->execute();
     $amazenStatement->debugDumpParams();
