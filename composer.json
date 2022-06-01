@@ -1,0 +1,19 @@
+{
+  "name": "vendor_name/emilien-php-de-base",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "bobacar.boutayeb",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "/App"
+    }
+  }
+}
