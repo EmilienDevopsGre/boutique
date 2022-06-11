@@ -119,3 +119,47 @@ foreach ($order as $key_name => $quantity) {
 
 
 
+//commande?
+
+
+<?php
+
+$products_in_cart = $_SESSION['cart'] ?? array();
+
+/* Vérification de la variable de session pour les produits en panier*/
+
+$productsToDb = array();
+//$subtotal = 0.00;
+// S'il y a des produits dans le panier
+if ($products_in_cart) {
+    /* Il y a des produits dans le panier, nous devons donc sélectionner ces produits dans la base de données.*/
+    /* Mettre les produits du panier dans un tableau de chaîne de caractères avec point d'interrogation, nous avons besoin que l'instruction SQL inclue  ( ?,?, ?,...etc).*/
+    $array_to_question_marks = implode(',', array_fill(0, count($products_in_cart), '?'));
+    $stmt = $db->prepare('SELECT * FROM products WHERE id IN (' . $array_to_question_marks . ')');
+    /* Nous avons uniquement besoin des clés du tableau, pas des valeurs, les clés sont les identifiants des produits. */
+    $stmt->execute(array_keys($products_in_cart));
+    /* Récupérer les produits de la base de données et retourner le résultat sous la forme d'un tableau.*/
+    $productsToDb = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Calculez le total partiel
+    foreach ($productsToDb as $product) {
+        //$subtotal += (float)$product['prix'] * (int)$products_in_cart[$product['id']];
+        $totalTTC;
+    }
+}
+?>
+
+
+
+//ancienne méthode validation produits existants etc...
+//        foreach ($products as $keyProduct => $product) {//pour chaque case key=nameP value=arrayInfoP
+//            $nbrProducts--; //décrémente pour enlever un produit à vérifier à chaque tour
+//            if ($productName === $keyProduct && intval(test_input($productQuantity)) > 0) { //vérifie si la clé du produit de la commande est présente dans le catalogue et vérifie s'il y a une quantité commandée
+//                $productsCarts[$productName] = $product; // reprend le tableau initialisé au début avec en index la clé du produit commandé, on lui assigne les valeurs du produit présentes dans le catalogue
+//                $productsCarts[$productName]['quantity'] = $productQuantity; //on ajoute une nouvelle entrée qui contient la quantité
+//                $productFind = true;//on affirme que le produit est trouvé
+//            } elseif (intval(test_input($productQuantity)) < 0 || intval(test_input($productQuantity)) > 20 || !is_int(intval(test_input($productQuantity)))) {//on nettoie les valeurs (test_input) puis on convertit la chaine de caractères en int (intval) et on regarde si la quantité rentre dans les limites
+//                $error[] .= " Vous n'avez pas commandé une quantité valide ";
+//            } elseif ($nbrProducts == 0 && intval(test_input($productQuantity)) > 0 && !$productFind) { //s'il n'y a plus de produits à parcourir et qu'il y a une quantité mais qu'il n'a pas trouvé de produit
+//                $error[] .= " Vous n'avez pas commandé un produit valide "; //TODO array_key_exist
+//            }
+//        }

@@ -2,63 +2,74 @@
 require_once "header.php";
 require_once "arrayproducts.php";
 require_once "my-functions.php";
+require_once "database.php";
 
+global $db;
 
 global $dbProducts;
 $productsCarts = [];
 $error = [];
-$nbrProducts = count($dbProducts); //la variable regarde le nombre de produits existants
+//la variable regarde le nombre de produits existants
+$nbrProducts = count($dbProducts);
 //$productFind = false; //initialise une variable pour vérifier si le produit est retrouvé
-
+//var_dump($_POST);
 //var_dump($_SESSION['quantity']);
-if (empty($_POST) && empty($_SESSION)) {
+if (isset($_POST['quantity'])) {
+    //@TODO ajouter les nouveaux produits aux anciens dans le panier
+    $_SESSION['quantity'] = $_POST['quantity'];
+}
+//var_dump($_SESSION['quantity']);
+$quantityNotFound = true;
+foreach ($_SESSION['quantity'] as $key =>$value) {
+////    var_dump($value);
+//    foreach ($value as $exist) {
+        if ($value > 0) {
+            $quantityNotFound = false;
+        } else {
+            unset($_SESSION['quantity'][$key]);
+        }
+//        //var_dump($value);
+//    }
+}
+//var_dump($quantityNotFound);
+if ($quantityNotFound) { //&& empty($_SESSION)
     echo "Votre panier est vide.";
     //$_POST['quantity']=0;
+
 } else {
 
 
-    if (isset($_POST['quantity'])) {
-        //TODO ajouter les nouveaux produits aux anciens dans le panier
-        $_SESSION['quantity'] = $_POST['quantity'];
-    }
+//    if (isset($_POST['quantity'])) {
+//        //TODO ajouter les nouveaux produits aux anciens dans le panier
+//        $_SESSION['quantity'] = $_POST['quantity'];
+//    }
+//var_dump($dbProducts);
 
     foreach ($_SESSION['quantity'] as $key => $value) {
 
-        $productName = test_input($key);
+        $productId = test_input($key);
 
         $productQuantity = intval(test_input($value));
 
 
-        if (array_key_exists($productName, $dbProducts)) {
+        if (array_key_exists($productId, $dbProducts)) {
             if ($productQuantity > 0 && $productQuantity <= 20) {
-                $productsCarts[$productName] = $dbProducts[$productName];
-                $productsCarts[$productName]['quantity'] = $productQuantity;
+                $productsCarts[$productId] = $dbProducts[$productId];
+                $productsCarts[$productId]['quantity'] = $productQuantity;
 
             }
 
         } else {
-            $error[] .= " Vous n'avez pas commandé un produit valide: $productName n'existe pas ";
+            $error[] .= " Vous n'avez pas commandé un produit valide: $productId n'existe pas ";
         }
     }
-
-//        foreach ($products as $keyProduct => $product) {//pour chaque case key=nameP value=arrayInfoP
-//            $nbrProducts--; //décrémente pour enlever un produit à vérifier à chaque tour
-//            if ($productName === $keyProduct && intval(test_input($productQuantity)) > 0) { //vérifie si la clé du produit de la commande est présente dans le catalogue et vérifie s'il y a une quantité commandée
-//                $productsCarts[$productName] = $product; // reprend le tableau initialisé au début avec en index la clé du produit commandé, on lui assigne les valeurs du produit présentes dans le catalogue
-//                $productsCarts[$productName]['quantity'] = $productQuantity; //on ajoute une nouvelle entrée qui contient la quantité
-//                $productFind = true;//on affirme que le produit est trouvé
-//            } elseif (intval(test_input($productQuantity)) < 0 || intval(test_input($productQuantity)) > 20 || !is_int(intval(test_input($productQuantity)))) {//on nettoie les valeurs (test_input) puis on convertit la chaine de caractères en int (intval) et on regarde si la quantité rentre dans les limites
-//                $error[] .= " Vous n'avez pas commandé une quantité valide ";
-//            } elseif ($nbrProducts == 0 && intval(test_input($productQuantity)) > 0 && !$productFind) { //s'il n'y a plus de produits à parcourir et qu'il y a une quantité mais qu'il n'a pas trouvé de produit
-//                $error[] .= " Vous n'avez pas commandé un produit valide "; //TODO array_key_exist
-//            }
-//        }
 
 
     if (!empty($error)) {
         echo '<div class="alert alert-danger" role="alert">' . $error[0] . '</div>';
     }
     ?>
+    <form method="post" action="placeorder.php">
     <table>
         <tr>
             <th>Produit</th>
@@ -105,7 +116,7 @@ if (empty($_POST) && empty($_SESSION)) {
         <tr>
             <th><label for="Transporteur">Transporteur</label></th>
             <td>
-                <select name="entreprise" id="entreprise_select">
+                <select id="entreprise_select"> <!-- name="entreprise"-->
                     <option value="Laposte">Laposte</option>
                     <option value="Chronopost">Chronopost</option>
                 </select>
@@ -130,13 +141,19 @@ if (empty($_POST) && empty($_SESSION)) {
             <td></td>
             <td></td>
             <th>Total TTC</th>
-            <td><?php echo formatPrice($total + $shipping) ?></td>
+            <?php $totalTTC = formatPrice($total + $shipping) ?>
+            <input type="hidden" name="totalTTC" value="<?=  $totalTTC ?>" >
+            <td><?= $totalTTC ?></td>
         </tr>
         </tfoot>
     </table>
 
+        <input type="hidden" name="validate" value="1">
+        <button type="submit"> Passer la commande</button>
+    </form>
 
     <?php
 }
+
 require "footer.php";
 ?>

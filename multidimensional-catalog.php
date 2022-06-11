@@ -14,9 +14,6 @@ echo '<form method="post" action="cart.php">';
     echo '<div class="row row-cols-1 row-cols-md-3 g-4 mb-5" id="products">';
 
         foreach ($dbProducts as $value) :
-//            foreach ($value as $item => $name) :
-//                echo '<pre>',var_dump($item), '<pre>';die();
-
 
             echo '<div class="col">';
             //echo '<a href="page_produit.html">';
@@ -26,7 +23,7 @@ echo '<form method="post" action="cart.php">';
             echo '<h5 class="card-title">' . $value["name"] . '</h5>';
             if (is_int($value["discount"])) {
                 echo '<p style="color: red" ><del> ' . formatPrice($value["price"]) . '</del></p>';
-                echo '<p>Remise : ' . $value["discount"] . '</p>';
+                echo '<p>Remise : ' . $value["discount"] . ' %' . '</p>';
                 echo '<p>Prix TTC après discount : ' . formatPrice(discountedPrice($value["price"], $value["discount"])) . '</p>';
             } else {
                 echo '<p>' . formatPrice($value["price"]) . '</p>';
@@ -36,13 +33,12 @@ echo '<form method="post" action="cart.php">';
             echo '<p>TVA : ' . $montantTva . '</p>';
 
             echo '<p>Poids : ' . $value["weight"] . '</p>';
-            echo '<input type="number" name="quantity[' . $value['name'] . ']" value = "0" min="0" max="20" >';
-
+            echo '<input type="number" name="quantity[' . $value['id'] . ']" value = "0" min="0" max="20" >';
             echo '</div></div></a></div>';
 
 //            endforeach;
         endforeach;
-echo '<input type="submit" value="Ajouter au panier" />';
+echo '<input type="submit" value="Ajouter au panier" >';
 
     echo '</div>';
 echo '</form>';
