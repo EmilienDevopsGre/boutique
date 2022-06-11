@@ -5,7 +5,7 @@ try
     $db = new PDO(
         'mysql:host=localhost;dbname=bdd_boutique_amazen;charset=utf8',
         'emilienm',
-        'akasha38!',
+        ']a]D3S!yyi7NelBf',
         [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
     );
 }
