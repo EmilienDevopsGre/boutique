@@ -148,12 +148,22 @@ if ($quantityNotFound) { //&& empty($_SESSION)
         </tfoot>
     </table>
 
+<!--    --><?php //var_dump($_SESSION); ?>
+
         <input type="hidden" name="validate" value="1">
         <button type="submit"> Passer la commande</button>
     </form>
 
     <?php
 }
+
+
+/*
+function newOrder();
+if (isset($_POST['placeorder']) && isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+   header('Location: index.php?page=placeorder'); exit;
+*/
+
 
 require "footer.php";
 ?>

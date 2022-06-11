@@ -18,8 +18,8 @@ if (!isset($_POST["validate"])) {
     $_SESSION['totalTTC'] = $_POST['totalTTC'];
 
     $aIdsProQty = [];
-    foreach ($_SESSION['quantity'] as $idProduct => $qty){
-        $aIdsProQty [$idProduct] = $qty;
+    foreach ($_SESSION['quantity'] as $key => $value){
+        $aIdsProQty [$key] = $value;
     }
     $rawTotalTTC = intval(str_replace(['€', ',', ' '],'',$_SESSION['totalTTC']));
 

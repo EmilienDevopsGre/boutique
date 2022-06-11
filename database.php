@@ -93,9 +93,11 @@ function deleteCustWithoutOrder(PDO $db): void
 }
 
 
-function orderNumber(PDO $db): int
+
+
+function orderNumber(PDO $db):int
 {
-    $findNumberInA = "SELECT number from orders";
+    $findNumberInA= "SELECT order_id from order_product";
 
     $amazenStatement = $db->prepare($findNumberInA);
     $amazenStatement->execute();
@@ -103,7 +105,7 @@ function orderNumber(PDO $db): int
 
     $randomOrderNumber = random_int(1, 10000);
 
-    while (in_array($randomOrderNumber, $result)) {
+    while (in_array($randomOrderNumber, $result)){
         $randomOrderNumber = random_int(1, 10000);
     }
 
@@ -123,16 +125,17 @@ function newOrder(PDO $db, array $aIdsProQty, string $totalTTC): void
     $amazenStatement = $db->prepare($query);
     $amazenStatement->bindValue(':pTotalTTC', $totalTTC);
     $amazenStatement->bindValue(':number', orderNumber($db));
+
     $amazenStatement->execute();
-
-
+    $amazenStatement->debugDumpParams();
     $lastOrderId = $db->lastInsertId();
-
-    foreach ($aIdsProQty as $kId => $vQuantity) {
+    foreach ($aIdsProQty as $kid => $Vquantity) {
         $query = "
-        INSERT INTO `order_product` (order_id, `product_id`, `quantity`) VALUES(?, ?, ?)";
+INSERT INTO `order_product` (order_id, `product_id`, `quantity`) VALUES(?, ?, ?)";
         $amazenStatement = $db->prepare($query);
-        $amazenStatement->execute([$lastOrderId, $kId, $vQuantity]);
+
+        $amazenStatement->execute([$lastOrderId, $kid, $Vquantity]);
+        $amazenStatement->debugDumpParams();
     }
 }
 
@@ -149,5 +152,7 @@ function displayProducts(PDO $db): array
     }
     return $finalArray;
 }
+
+displayProducts($db);
 
 
