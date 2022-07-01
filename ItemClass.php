@@ -6,7 +6,7 @@ class ItemClass
     public string $name;
     public string $description;
     public float $price;
-    public string $url_image;
+    public string $img_url;
     public int $weight;
     public int $quantity;
     public int $available;
@@ -25,7 +25,7 @@ class ItemClass
         $this->name = $tabInterm[0]['name'];
         $this->description = $tabInterm[0]['description'];
         $this->price = $tabInterm[0]['price'];
-        $this->url_image = $tabInterm[0]['url_image'];
+        $this->img_url = $tabInterm[0]['img_url'];
         $this->weight = $tabInterm[0]['weight'];
         $this->quantity = $tabInterm[0]['quantity'];
         $this->available = $tabInterm[0]['available'];
