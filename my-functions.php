@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 require_once "database.php";
+include_once "ItemClass.php";
 
 
 function formatPrice($price):string
@@ -39,8 +40,23 @@ function test_input(string $data): string
     return $data;
 }
 
-function displayItem(ItemClass $pItem)
+
+function discount (ItemClass $Item)
 {
+    if ($Item->discount > 0) {
+        echo '<p style="color: red" ><del> ' . formatPrice($Item->price) . '</del></p>';
+        echo '<p>Remise : ' . $Item->discount . ' %' . '</p>';
+        echo '<p>Prix TTC après discount : ' . formatPrice(discountedPrice($Item->price, $Item->discount)) . '</p>';
+    } else {
+
+        echo '<p>' . formatPrice($Item->price) . '</p>';
+    }
+}
+
+
+function displayItem(ItemClass $Item)
+{
+
     ?>
 
     <form method="post" action="cart.php">
@@ -52,15 +68,15 @@ function displayItem(ItemClass $pItem)
         <div class="card text-center">
         <img src="" "class="card-img-top" alt="...">
         <div class="card-body">
-        <h5 class="card-title"></h5>
+        <h5 class="card-title"><?php echo ($Item -> name); ?></h5>
 
-            //discount
+            <p>Discount : <?php discount($Item); ?></p>
 
-        <p>Prix HT : </p>
+        <p>Prix HT : <?php echo ($Item -> price); ?></p>
 
-        <p>TVA : </p>
+        <p>TVA : <?php echo (0.2*($Item -> price)); ?> </p>
 
-        <p>Poids :</p>
+        <p>Poids :<?php echo ($Item -> weight); ?></p>
         <input type="number" name="" value = "0" min="0" max="20" >
         </div></div></a></div>
 
@@ -73,15 +89,4 @@ function displayItem(ItemClass $pItem)
 
 
 
-function discount ($value)
-{
-    var_dump($value);
-    if ($value["discount"] > 0) {
-        echo '<p style="color: red" ><del> ' . formatPrice($value["price"]) . '</del></p>';
-        echo '<p>Remise : ' . $value["discount"] . ' %' . '</p>';
-        echo '<p>Prix TTC après discount : ' . formatPrice(discountedPrice($value["price"], $value["discount"])) . '</p>';
-    } else {
 
-        echo '<p>' . formatPrice($value["price"]) . '</p>';
-    }
-}

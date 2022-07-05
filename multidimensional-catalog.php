@@ -4,14 +4,18 @@ require_once 'my-functions.php';
 require_once "header.php";
 require_once "arrayproducts.php";
 require_once "database.php";
+require_once 'ItemClass.php';
 
-
-
+global $db;
 global $dbProducts;
 
-displayItem($dbProducts);
 
 
+
+$randomProduct = new ItemClass();
+//var_dump($randomProduct->takeOneProductFromDb($db, 5));
+
+displayItem($randomProduct->takeOneProductFromDb($db, 5));
 
 
 

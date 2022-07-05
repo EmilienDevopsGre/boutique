@@ -7,6 +7,7 @@ require_once "database.php";
 global $db;
 
 global $dbProducts;
+
 $productsCarts = [];
 $error = [];
 //la variable regarde le nombre de produits existants
