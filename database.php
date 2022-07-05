@@ -153,6 +153,6 @@ function displayProducts(PDO $db): array
     return $finalArray;
 }
 
-displayProducts($db);
+
 
 

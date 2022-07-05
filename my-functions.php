@@ -39,7 +39,7 @@ function test_input(string $data): string
     return $data;
 }
 
-function displayItem($pDbProduct)
+function displayItem(ItemClass $pItem)
 {
     ?>
 
