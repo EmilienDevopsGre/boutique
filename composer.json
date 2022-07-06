@@ -1,0 +1,14 @@
+{
+  "name": "vendor_name/boutique",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "emilien.mace",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+  }
+}

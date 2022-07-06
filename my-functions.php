@@ -66,7 +66,7 @@ function displayItem(ItemClass $Item)
         <div class="col">
 
         <div class="card text-center">
-        <img src="" "class="card-img-top" alt="...">
+        <img src="<?php echo ($Item -> img_url); ?>" "class="card-img-top" alt="...">
         <div class="card-body">
         <h5 class="card-title"><?php echo ($Item -> name); ?></h5>
 

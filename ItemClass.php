@@ -17,23 +17,19 @@ class ItemClass extends GetProductById
 
     function takeOneProductFromDb(PDO $db, int $id): ItemClass
     {
-        $oneItem = new ItemClass();
         //var_dump($oneItem);
-        $product = $this->getOneProductFromDb($db ,$id);
-        //var_dump($product[0]);
-        foreach ($product[0] as $key => $value) {
-            $oneItem->id = $product[0][$key];
-            $oneItem->name = $product[0][$key];
-            $oneItem->description = $product[0][$key];
-            $oneItem->price = $product[0][$key];
-            $oneItem->img_url = $product[0][$key];
-            $oneItem->weight = $product[0][$key];
-            $oneItem->quantity = $product[0][$key];
-            $oneItem->available = $product[0][$key];
-            $oneItem->discount = $product[0][$key];
-            var_dump($oneItem);
-        }
-        return $oneItem;
+        $product = $this->getOneProductFromDb($db, $id);
+        var_dump($product);
+        $this->id = $product[0]['id'];
+        $this->name = $product[0]['name'];
+        $this->description = $product[0]['description'];
+        $this->price = $product[0]['price'];
+        $this->img_url = $product[0]['img_url'];
+        $this->weight = $product[0]['weight'];
+        $this->quantity = $product[0]['quantity'];
+        $this->available = $product[0]['available'];
+        $this->discount = $product[0]['discount'];
+        return $this;
     }
 }
 /*
